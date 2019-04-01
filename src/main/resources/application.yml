@@ -14,6 +14,7 @@ eureka:
     registerWithEureka: true
 
 zuul:
+  ignoredServices: '*'
   routes:
     identity:
       path: /identity/**

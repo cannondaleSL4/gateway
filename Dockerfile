@@ -1,14 +1,9 @@
-FROM java:openjdk-8-jdk-alpine
-
-# add directly the jar
-ADD target/*.jar /app.jar
-
-# to create a modification date
-RUN sh -c 'touch /app.jar'
-
-# creates a mount point
+FROM openjdk:8-jdk-alpine
 VOLUME /tmp
+COPY target/*.jar app.jar
+EXPOSE 8761
 
-CMD ["java", "-jar", "/app.jar", "--spring.profiles.active=prod"]
+ENTRYPOINT ["java","-jar","/app.jar"]
 
-EXPOSE 8762
+# docker build -t gateway .
+# docker run -p 8762:8762 --net=host gateway
